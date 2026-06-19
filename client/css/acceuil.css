@@ -1,0 +1,51 @@
+/* page créée par Arnaud Ramirez / 13-mars-2024 */
+
+/* Acceuil */
+.imageAcceuil {
+    display: none;
+    width: 100%;
+    height: 100%;
+
+}
+
+.imageAcceuil2 {
+    width: 100%;
+    height: 100%;
+
+}
+
+p {
+    width: 50%;
+    text-align: justify;
+}
+
+
+article h1 {
+    padding-top: 5%;
+
+}
+
+article {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+}
+
+
+@media all and (max-width: 800px) {
+    .imageAcceuil2 {
+        display: none;
+    }
+
+    .imageAcceuil {
+        display: flex;
+    }
+
+    p {
+        width: 80%;
+    }
+}
+

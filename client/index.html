@@ -1,0 +1,75 @@
+<!-- page créée par Arnaud Ramirez / 13-mars-2024 -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/acceuil.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!--barre du haut-->
+    <header>
+        <section>
+            <!--logo + petit titre -->
+            <div class="logoTexte">
+                <img class="logo" src="./image/logo.png" alt="image.png">
+                <h1>HyperByke</h1>
+            </div>
+
+            <!--button de navigation-->
+            <div class="buttonMenu">
+                <a class="btn btn-navbar" id="btnMenu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+
+        </section>
+    </header>
+
+
+
+    <!--contenue-->
+    <article>
+        <img class="imageAcceuil" src="./image/imageAcceuil.jpg" alt="image.jpg">
+        <img class="imageAcceuil2" src="./image/imageAcceuil2.jpg" alt="image.jpg">
+        <h1>HyperByke</h1>
+        <p>
+            Bonjour et bienvenue sur notre site.
+            Nous sommes une équipe de passionnés de motos sportives, réunis par l’envie
+             de vivre pleinement notre passion et de la partager avec vous. Chaque jour,
+            nous mettons notre énergie, notre savoir-faire et notre exigence au service
+            de machines qui nous inspirent autant qu’elles nous défient. Si, comme nous,
+            vous aimez l’odeur de l’essence, le son des moteurs et la sensation de
+             liberté que seule une moto peut offrir, alors vous êtes au bon endroit.
+        </p>
+        <a class="source" href="./html/source.html">Source</a>
+    </article>
+
+
+
+    <!--menu ouvrant-->
+    <nav id="nav">
+        <a href="./index.html">
+            <div class="menuOpen">Accueil</div>
+        </a>
+        <a href="./html/garage.html">
+            <div>Garage</div>
+        </a>
+        <a href="./html/logistique.html">
+            <div>Logistique</div>
+        </a>
+        <a href="./html/login.html">
+            <div>Login</div>
+        </a>    </nav>
+    <script src="./controller/menuController.js"></script>
+    <script type="module" src="./controller/authentificationController.js"></script>
+</body>
+
+</html>

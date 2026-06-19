@@ -1,0 +1,201 @@
+/* page créée par Arnaud Ramirez / 13-mars-2024 */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: sans-serif;
+    padding-bottom: 5%;
+    margin: 0;
+    padding: 0;
+}
+
+/* menu */
+
+header {
+    background-color: black;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+
+}
+
+header section {
+    margin-inline: 5%;
+    display: flex;
+    justify-content: flex-start; /* Aligne tout à gauche par défaut */
+    align-items: center;
+    gap: 0;
+    position: relative;
+}
+
+#user-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-left: auto; /* pousse à droite */
+    margin-right: 0;
+}
+
+.btn-deconnexion {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: normal;
+    transition: all 0.2s ease;
+}
+
+.btn-deconnexion:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+header h1 {
+    color: #fff;
+    margin: 0;
+    padding-left: 10px;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.logoTexte {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.buttonMenu {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+header section > .buttonMenu {
+    order: 3;
+    margin-left: 20px;
+    margin-right: 0;
+}
+header section > .logoTexte {
+    order: 1;
+}
+header section > #user-container {
+    order: 2;
+}
+
+.menuNav {
+    height: 50px;
+    width: 50px;
+}
+
+.logo {
+    height: 75px;
+    width: 75px;
+    padding: 5px;
+    object-fit: contain;
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-navbar {
+    float: right;
+    padding: 12px 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.icon-bar {
+    display: block;
+    width: 30px;
+    height: 6px;
+    background-color: #CECECE;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+}
+
+.icon-bar+.icon-bar {
+    margin-top: 5px;
+}
+
+nav {
+
+    display: none;
+    background-color: #797979;
+    position: fixed;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border:3px solid black;;
+    right: 0%;
+    top: 80px;
+
+    width: 300px;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+nav div {
+    padding: 20px;
+    background-color: #aeb1b3;
+    width: 200px;
+    height: 25%;
+    margin-top:10px ;
+    margin-bottom:10px ;
+    text-align: center;
+    font-size: larger;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+nav .openPage {
+    background-color: #ffffff;
+}
+
+.menuOpen {
+    background-color: rgb(221, 221, 221);
+}
+
+.source {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    border: solid 1px;
+}
+
+@media (max-width: 700px) {
+    header section {
+        flex-direction: row;
+        gap: 0;
+    }
+    .logoTexte {
+        margin-right: 10px;
+    }
+    #user-container {
+        font-size: 0.95em;
+        gap: 8px;
+    }
+    .buttonMenu {
+        margin-left: 10px;
+    }
+}

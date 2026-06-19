@@ -1,0 +1,96 @@
+<!-- page créée par Arnaud Ramirez / 13-mars-2024 -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Garage</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/garage.css" />
+    <link rel="stylesheet" href="../css/tableaux.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!-- barre du haut -->
+    <header>
+        <section>
+            <!-- logo + petit titre -->
+            <div class="logoTexte">
+                <img class="logo" src="../image/logo.png" alt="image.png" />
+                <h1>HyperByke</h1>
+            </div>
+
+            <!-- button de navigation -->
+            <div class="buttonMenu">
+                <a class="btn btn-navbar" id="btnMenu" href="#">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <div class="zones-container">
+
+            <div class="zone" id="zone-gauche">
+                <!-- Contenu gauche -->
+                <h2>Motos en cours de production</h2>
+                <button id="btn-ajouter-moto" class="carte-moto-btn" style="margin-bottom: 20px;">Ajouter une moto</button>
+                <div id="form-ajouter-moto" style="display:none; margin-bottom: 20px; background:#f7f7f7; border-radius:12px; box-shadow:0 2px 8px #0001; padding:24px; max-width:400px;">
+                    <h3 style="margin-top:0;">Ajouter une moto</h3>
+                    <label for="input-nom-client" style="display:block; margin-bottom:8px;">Nom du client</label>
+                    <input type="text" id="input-nom-client" style="width:100%; margin-bottom:12px; padding:8px; border-radius:6px; border:1px solid #ccc;">
+
+                    <label for="input-nom-modele" style="display:block; margin-bottom:8px;">Modèle de la moto</label>
+                    <select id="input-nom-modele" style="width:100%; margin-bottom:12px; padding:8px; border-radius:6px; border:1px solid #ccc;">
+                        <option value="1">yamaha R1</option>
+                        <option value="2">yamaha MT-07</option>
+                        <option value="3">kawasaki ZX-6R</option>
+                    </select>
+
+                    <label for="input-date-livraison" style="display:block; margin-bottom:8px;">Date de livraison</label>
+                    <input type="date" id="input-date-livraison" style="width:100%; margin-bottom:20px; padding:8px; border-radius:6px; border:1px solid #ccc;">
+
+                    <div style="display:flex; gap:10px;">
+                        <button id="btn-retour-ajout-moto" class="carte-moto-btn" style="background:#bbb; color:#222;">Retour</button>
+                        <button id="btn-creer-moto" class="carte-moto-btn">Créer</button>
+                    </div>
+                </div>
+                <div id="lise-moto">
+                    <!-- Les cartes moto seront générées dynamiquement par garageController.js -->
+                </div>
+            </div>
+
+            <div class="zone" id="zone-droite" style="display: flex; flex-direction: column; height: 100%;">
+                <!-- Contenu droite -->
+                <h2>Stock des pièces</h2>
+                <div id="wrapper" style="flex: 1 1 auto; min-height: 0; max-height: none; overflow-y: auto;"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- menu ouvrant -->
+    <nav id="nav">
+        <a href="../index.html">
+            <div>Accueil</div>
+        </a>
+        <a href="./garage.html">
+            <div class="menuOpen">Garage</div>
+        </a>
+        <a href="./logistique.html">
+            <div>Logistique</div>
+        </a>
+        <a href="./login.html">
+            <div>Login</div>
+        </a>
+    </nav>    <script src="../controller/menuController.js"></script>
+    <script type="module" src="../controller/garageController.js"></script>
+    <script type="module" src="../controller/authentificationController.js"></script>
+</body>
+
+</html>

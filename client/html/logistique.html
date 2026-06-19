@@ -1,0 +1,59 @@
+<!-- page créée par Arnaud Ramirez / 13-mars-2024 -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistique - HyperByke</title>  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/logistique.css" />
+  <link rel="stylesheet" href="../css/tableaux.css" />
+</head>
+
+<body>
+  <!-- Barre du haut -->
+  <header>
+    <section class="header-content">
+      <div class="logoTexte">
+        <img class="logo" src="../image/logo.png" alt="Logo HyperByke" />
+        <h1>HyperByke</h1>
+      </div>
+      <div class="buttonMenu">
+        <a class="btn btn-navbar" id="btnMenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </div>
+    </section>
+  </header>
+
+  <!-- Contenu principal -->
+  <article>
+    <div class="divTableau">
+      <div id="wrapper"></div>
+    </div>
+  </article>
+
+  <!-- Menu latéral -->
+  <nav id="nav">
+    <a href="../index.html">
+      <div>Accueil</div>
+    </a>
+    <a href="./garage.html">
+      <div>Garage</div>
+    </a>
+    <a href="./logistique.html">
+      <div class="menuOpen">Logistique</div>
+    </a>
+    <a href="./login.html">
+      <div>Login</div>
+    </a>
+  </nav>
+  <!-- Scripts -->
+  <script src="../controller/menuController.js"></script>
+  <script type="module" src="../controller/logistiqueController.js"></script>
+  <script type="module" src="../controller/authentificationController.js"></script>
+</body>
+
+</html>

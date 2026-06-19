@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: app/services/stockServices.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: app/services/stockServices.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview Service pour la gestion du stock de pièces
+ * @author HyperBike Team
+ * @version 1.0.0
+ */
+
+// filepath: c:\Users\RamirezA02\OneDrive - EDUETATFR\EMF\2e\295\Projet\HyperBikeServer\app\services\stockServices.js
+const pool = require('../../config/database.js');
+
+/**
+ * Récupère tous les stocks de pièces depuis la base de données
+ * @async
+ * @function getAllStocks
+ * @returns {Promise&lt;Object[]>} Tableau contenant toutes les pièces avec leurs quantités en stock
+ * @throws {Error} En cas d'erreur lors de la requête base de données
+ * @example
+ * const stocks = await getAllStocks();
+ * // Retourne: [{ pk_piece: 1, nomPiece: "Moteur V8", quantiteStock: 15 }]
+ */
+const getAllStocks = async () => {
+    const connexion = await pool.getConnection();
+    try {
+        const [rows] = await connexion.query(
+            'SELECT pk_piece, nomPiece, quantiteStock FROM Piece'
+        );
+        return rows;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des stocks :', error);
+        throw error;
+    } finally {
+        if (connexion) connexion.release();
+    }
+};
+
+/**
+ * Met à jour la quantité de stock d'une pièce spécifique (remplace la valeur existante)
+ * @async
+ * @function updateStock
+ * @param {number} pk_piece - L'ID de la pièce à mettre à jour
+ * @param {number} quantiteStock - La nouvelle quantité de stock
+ * @returns {Promise&lt;boolean>} true si la mise à jour a réussi, false si la pièce n'existe pas
+ * @throws {Error} En cas d'erreur lors de la mise à jour
+ * @example
+ * const misAJour = await updateStock(1, 25);
+ * // Retourne: true si mise à jour réussie
+ */
+const updateStock = async (pk_piece, quantiteStock) => {
+    const connexion = await pool.getConnection();
+    try {
+        const [result] = await connexion.query(
+            'UPDATE Piece SET quantiteStock = ? WHERE pk_piece = ?',
+            [quantiteStock, pk_piece]
+        );
+        return result.affectedRows > 0;
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour du stock :', error);
+        throw error;
+    } finally {
+        if (connexion) connexion.release();
+    }
+};
+
+/**
+ * Ajoute une quantité spécifiée au stock existant d'une pièce
+ * @async
+ * @function addStock
+ * @param {number} pk_piece - L'ID de la pièce
+ * @param {number} quantiteToAdd - La quantité à ajouter au stock existant
+ * @returns {Promise&lt;boolean>} true si l'ajout a réussi, false si la pièce n'existe pas
+ * @throws {Error} En cas d'erreur lors de l'ajout
+ * @example
+ * const ajoute = await addStock(1, 10);
+ * // Retourne: true si ajout réussi (ancien stock + 10)
+ */
+const addStock = async (pk_piece, quantiteToAdd) => {
+    const connexion = await pool.getConnection();
+    try {
+        const [result] = await connexion.query(
+            'UPDATE Piece SET quantiteStock = quantiteStock + ? WHERE pk_piece = ?',
+            [quantiteToAdd, pk_piece]
+        );
+        return result.affectedRows > 0;
+    } catch (error) {
+        console.error('Erreur lors de l\'ajout de stock :', error);
+        throw error;
+    } finally {
+        if (connexion) connexion.release();
+    }
+};
+
+module.exports = {
+    getAllStocks,
+    updateStock,
+    addStock,
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addMoto">addMoto</a></li><li><a href="global.html#addStock">addStock</a></li><li><a href="global.html#checkLogin">checkLogin</a></li><li><a href="global.html#connection">connection</a></li><li><a href="global.html#deleteMoto">deleteMoto</a></li><li><a href="global.html#getAllMotos">getAllMotos</a></li><li><a href="global.html#getAllStocks">getAllStocks</a></li><li><a href="global.html#getMoto">getMoto</a></li><li><a href="global.html#getMotoById">getMotoById</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#montePiece">montePiece</a></li><li><a href="global.html#options">options</a></li><li><a href="global.html#updateStock">updateStock</a></li><li><a href="global.html#validateAuthentification">validateAuthentification</a></li><li><a href="global.html#validateMoto">validateMoto</a></li><li><a href="global.html#validateStock">validateStock</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Jun 10 2025 23:44:15 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

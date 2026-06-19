@@ -1,0 +1,78 @@
+<!-- page créée par Arnaud Ramirez / 13-mars-2024 -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!--barre du haut-->
+    <header>
+        <section>
+            <!--logo + petit titre -->
+            <div class="logoTexte">
+                <img class="logo" src="../image/logo.png" alt="image.png">
+                <h1>HyperByke</h1>
+            </div>
+
+            <!--button de navigation-->
+            <div class="buttonMenu">
+                <a class="btn btn-navbar" id="btnMenu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+
+        </section>
+    </header>
+
+
+
+    <!--contenue-->
+    <article>
+        <h1>Login</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Se connecter</button>
+            </div>
+        </form>
+        <p id="loginMessage"></p>
+        <a class="source" href="./source.html">Source</a>
+    </article>
+
+
+
+    <!--menu ouvrant-->
+    <nav id="nav">
+        <a href="../index.html">
+            <div>Accueil</div>
+        </a>
+        <a href="./garage.html">
+            <div>Garage</div>
+        </a>
+        <a href="./logistique.html">
+            <div>Logistique</div>
+        </a>
+        <a href="./login.html">
+            <div class="menuOpen">Login</div>
+        </a>
+    </nav>    <script src="../controller/menuController.js"></script>
+    <script type="module" src="../controller/authentificationController.js"></script>
+</body>
+
+</html>

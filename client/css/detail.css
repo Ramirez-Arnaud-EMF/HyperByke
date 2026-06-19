@@ -1,0 +1,154 @@
+body {
+  background: #f4f5f7;
+}
+.detail-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 32px;
+  margin: 32px 4vw 0 4vw;
+}
+.detail-gauche {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.detail-gauche h1 {
+  font-size: 3.5rem;
+  margin-bottom: 24px;
+  margin-top: 0;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.detail-moto-img {
+  width: 420px;
+  height: 320px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.detail-moto-img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.detail-barre-progression {
+  width: 420px;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px #0001;
+}
+.detail-barre-progression-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50 60%, #ff9800 100%);
+  width: 60%;
+  border-radius: 12px 0 0 12px;
+  transition: width 0.4s;
+}
+.detail-droite {
+  flex: 1 1 60%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0002;
+  padding: 32px 32px 24px 32px;
+  min-width: 480px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.detail-info-moto {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.detail-info-moto span {
+  margin-right: 18px;
+}
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+.detail-table th, .detail-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+.detail-table th {
+  background: #f7f7f7;
+  font-weight: 600;
+}
+.detail-table td {
+  background: #fff;
+}
+.stock-green {
+  background: #c8e6c9 !important;
+  color: #222;
+}
+.stock-orange {
+  background: #ffe0b2 !important;
+  color: #222;
+}
+.stock-red {
+  background: #ffcdd2 !important;
+  color: #222;
+}
+.detail-table .btn-monter-piece {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.detail-table .btn-monter-piece:hover {
+  background: #bdbdbd;
+}
+.detail-retour {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+.detail-retour button {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.detail-retour button:hover {
+  background: #bdbdbd;
+}
+@media (max-width: 1100px) {
+  .detail-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .detail-gauche, .detail-droite {
+    width: 100%;
+    max-width: 100%;
+  }
+  .detail-barre-progression, .detail-moto-img {
+    width: 100%;
+    max-width: 100%;
+  }
+}

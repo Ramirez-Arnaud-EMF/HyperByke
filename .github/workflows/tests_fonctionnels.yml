@@ -1,0 +1,86 @@
+name: Tests fonctionnels avec Cypress
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+    pull_request:
+        branches:
+            - '*'
+
+jobs:
+    cypress-run:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+
+            - name: Install root dependencies
+              run: npm ci
+
+            - name: Start application stack (Docker Compose)
+              # Utilise docker-compose.yml (production) qui démarre MySQL + serveur Node + client Nginx
+              # Le client Nginx proxifie /api/ vers le serveur, comme en production locale
+              run: docker compose up -d --build
+
+            - name: Wait for MySQL to be healthy
+              run: |
+                  for i in {1..30}; do
+                    if docker compose exec -T mysql mysqladmin ping -h localhost --silent 2>/dev/null; then
+                      echo "MySQL is up!"
+                      break
+                    fi
+                    echo "Waiting for MySQL... ($i/30)"
+                    sleep 3
+                  done
+
+            - name: Wait for API server on port 3000
+              run: |
+                  for i in {1..30}; do
+                    if curl -s http://localhost:3000/api > /dev/null 2>&1; then
+                      echo "API is up!"
+                      break
+                    fi
+                    echo "Waiting for API... ($i/30)"
+                    sleep 3
+                  done
+
+            - name: Wait for client on port 8080
+              run: |
+                  for i in {1..20}; do
+                    STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 2>/dev/null)
+                    if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
+                      echo "Client is up! (HTTP $STATUS)"
+                      exit 0
+                    fi
+                    echo "Waiting for client... ($i/20) HTTP=$STATUS"
+                    sleep 3
+                  done
+                  echo "Client did not become ready in time." >&2
+                  exit 1
+
+            - name: Run Cypress tests
+              uses: cypress-io/github-action@v6
+              with:
+                  install: false
+                  browser: chrome
+
+            - name: Upload Cypress screenshots on failure
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: cypress-screenshots
+                  path: cypress/screenshots
+                  if-no-files-found: ignore
+
+            - name: Stop Docker Compose
+              if: always()
+              run: docker compose down

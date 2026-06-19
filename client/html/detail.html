@@ -1,0 +1,135 @@
+<!-- page créée par Arnaud Ramirez / 10-juin-2025 -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Détail Moto - HyperByke</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/garage.css" />
+  <link rel="stylesheet" href="../css/tableaux.css" />
+  <link rel="stylesheet" href="../css/detail.css" />
+
+</head>
+<body>
+  <!-- Barre du haut -->
+  <header>
+    <section class="header-content">
+      <div class="logoTexte">
+        <img class="logo" src="../image/logo.png" alt="Logo HyperByke" />
+        <h1>HyperByke</h1>
+      </div>
+      <div class="buttonMenu">
+        <a class="btn btn-navbar" id="btnMenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <div class="detail-container">
+      <div class="detail-gauche">
+        <h1>yamaha r1</h1>
+        <div class="detail-moto-img">
+          <img src="../image/imageAcceuil.jpg" alt="yamaha r1" />
+        </div>
+        <div class="detail-barre-progression">
+          <div class="detail-barre-progression-inner" style="width:60%"></div>
+        </div>
+      </div>
+      <div class="detail-droite">
+        <div class="detail-info-moto">
+          <span>Date : 25/05/2026</span>
+          <span>Client : ----</span>
+          <span>ID : 125964</span>
+        </div>
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>Pièce</th>
+              <th>Stock</th>
+              <th>Moto</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Amortisseur arrière</td>
+              <td class="stock-green">123</td>
+              <td>2</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Boîte de transmission</td>
+              <td class="stock-orange">12</td>
+              <td>1</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Filtres à huile</td>
+              <td class="stock-green">48</td>
+              <td>1</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Bougies d'allumage</td>
+              <td class="stock-red">1</td>
+              <td>2</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Câble d'embrayage</td>
+              <td class="stock-red">8</td>
+              <td>1</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Kit de chaîne</td>
+              <td class="stock-red">0</td>
+              <td>1</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Pédale de frein</td>
+              <td class="stock-green">234</td>
+              <td>1</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+            <tr>
+              <td>Témoin de clignotant</td>
+              <td class="stock-orange">23</td>
+              <td>4</td>
+              <td><button class="btn-monter-piece">Monter la pièce</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="detail-retour">
+          <button onclick="window.history.back()">Retour</button>
+          <button id="btn-supprimer-moto" style="background:#e57373;color:#fff;margin-left:16px;">Supprimer la moto</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav id="nav">
+    <a href="../index.html">
+      <div>Accueil</div>
+    </a>
+    <a href="./garage.html">
+      <div>Garage</div>
+    </a>
+    <a href="./logistique.html">
+      <div class="menuOpen">Logistique</div>
+    </a>
+    <a href="./login.html">
+      <div>Login</div>
+    </a>
+  </nav>
+  <script src="../controller/menuController.js"></script>
+  <script type="module" src="../controller/detailController.js"></script>
+  <script type="module" src="../controller/authentificationController.js"></script>
+</body>
+</html>

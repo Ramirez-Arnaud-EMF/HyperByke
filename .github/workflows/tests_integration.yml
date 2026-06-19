@@ -1,0 +1,91 @@
+name: Tests d'intégration avec Vitest
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+    pull_request:
+        branches:
+            - '*'
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        services:
+            mysql:
+                image: mysql:8.4
+                env:
+                    MYSQL_ROOT_PASSWORD: root
+                ports:
+                    - 3306:3306
+                options: >-
+                    --health-cmd "mysqladmin ping -h 127.0.0.1 -P 3306 -proot"
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 10
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+
+            - name: Install MySQL client
+              run: |
+                  sudo apt-get update -qq
+                  sudo apt-get install -y -qq mysql-client
+
+            - name: Wait for MySQL
+              run: |
+                  for i in {1..30}; do
+                    if mysqladmin ping -h 127.0.0.1 -P 3306 -uroot -proot --silent 2>/dev/null; then
+                      echo "MySQL is up!"
+                      exit 0
+                    fi
+                    echo "Waiting for MySQL... ($i/30)"
+                    sleep 2
+                  done
+                  echo "MySQL did not become ready in time." >&2
+                  exit 1
+
+            - name: Initialize test database
+              run: mysql -h 127.0.0.1 -P 3306 -uroot -proot < server/data/database-test.sql
+
+            - name: Install server dependencies
+              run: cd server && npm install
+
+            - name: Install root dependencies
+              run: npm ci
+
+            - name: Start API server (port 3001)
+              run: node server/server.js &
+              env:
+                  PORT: 3001
+                  DB_HOST: 127.0.0.1
+                  DB_USER: root
+                  DB_PASSWORD: root
+                  DB_NAME: db_hyperbyke_test
+                  JWT_SECRET: ci-test-secret-hyperbyke
+                  JWT_EXPIRATION: 1h
+
+            - name: Wait for API server
+              run: |
+                  for i in {1..20}; do
+                    if curl -s http://localhost:3001/api > /dev/null 2>&1; then
+                      echo "API server is up!"
+                      exit 0
+                    fi
+                    echo "Waiting for API... ($i/20)"
+                    sleep 2
+                  done
+                  echo "API server did not start in time." >&2
+                  exit 1
+
+            - name: Run integration tests
+              run: npm run test:integration

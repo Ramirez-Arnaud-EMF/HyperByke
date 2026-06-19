@@ -1,0 +1,32 @@
+/* Styles pour les tableaux natifs logistique et garage */
+.table-logistique, .table-garage {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(31,38,135,0.08);
+}
+.table-logistique th, .table-logistique td,
+.table-garage th, .table-garage td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+.table-logistique th, .table-garage th {
+  background: #f5f5f5;
+  font-weight: bold;
+}
+.table-logistique tr:nth-child(even), .table-garage tr:nth-child(even) {
+  background: #fafafa;
+}
+.btn-commander, .btn-modifier {
+  margin-right: 5px;
+  padding: 4px 10px;
+  border: 1px solid #222;
+  background: #eee;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.btn-commander:hover, .btn-modifier:hover {
+  background: #d1eaff;
+}

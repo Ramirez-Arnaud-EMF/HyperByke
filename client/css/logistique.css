@@ -1,0 +1,91 @@
+/* Wrapper qui contient le tableau */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 80vh; /* 80% de la hauteur de la fenêtre */
+  min-height: 300px;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.18);
+  overflow: auto;
+}
+
+/* Grid.js wrapper - zone scrollable */
+.gridjs-wrapper {
+  flex: 1 1 auto;        /* prend toute la hauteur dispo dans wrapper */
+  overflow-y: auto !important;  /* scroll vertical auto (apparait si nécessaire) */
+  overflow-x: hidden !important; /* pas de scroll horizontal */
+  display: block;
+  box-sizing: border-box;
+  height: 100% !important;          /* prends 100% de la hauteur du parent flex */
+  min-height: 0;
+  max-height: 100%;
+}
+
+/* Table pour forcer l’adaptation */
+.gridjs-table {
+  width: 100% !important;
+  table-layout: fixed !important;
+  word-break: break-word;
+}
+
+/* Cellules */
+.gridjs-table th,
+.gridjs-table td {
+  width: 50% !important;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  padding: 8px 6px;
+}
+
+/* Masquer la recherche Grid.js */
+.gridjs-search {
+  display: none !important;
+}
+
+.divTableau {
+  height: 100%;
+  min-height: 0;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.table-logistique {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100vw !important;
+  table-layout: auto !important;
+}
+
+@media (max-width: 800px) {
+  #wrapper {
+    height: 60vh;
+    min-height: 200px;
+  }
+}
+
+body {
+  padding-top: 100px; /* Ajoute un padding pour laisser la place au header */
+}
+
+#wrapper, .divTableau, .table-logistique {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+main, article, .divTableau {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: app/controllers/stockController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: app/controllers/stockController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview Contrôleur pour la gestion du stock de pièces
+ * @author HyperBike Team
+ * @version 1.0.0
+ */
+
+// filepath: c:\Users\RamirezA02\OneDrive - EDUETATFR\EMF\2e\295\Projet\HyperBikeServer\app\controllers\stockController.js
+const stockServices = require('../services/stockServices');
+
+/**
+ * Récupère tout le stock de pièces disponibles
+ * @async
+ * @function getAllStocks
+ * @param {Object} req - Objet de requête Express
+ * @param {Object} res - Objet de réponse Express
+ * @returns {Promise&lt;void>} Réponse JSON avec la liste des stocks
+ * @throws {Error} 500 - En cas d'erreur serveur interne
+ * @example
+ * GET /api/stock/allstock
+ * 
+ * Response:
+ * [
+ *   {
+ *     "pk_piece": 1,
+ *     "nomPiece": "Moteur V8",
+ *     "quantiteStock": 15
+ *   }
+ * ]
+ */
+const getAllStocks = async (req, res) => {
+    try {
+        const rows = await stockServices.getAllStocks();
+        res.status(200).json(rows);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+/**
+ * Ajoute du stock à une pièce existante
+ * @async
+ * @function addStock
+ * @param {Object} req - Objet de requête Express
+ * @param {Object} req.params - Paramètres de la requête
+ * @param {string} req.params.id - ID de la pièce
+ * @param {Object} req.body - Corps de la requête
+ * @param {number} req.body.quantiteStock - Quantité à ajouter au stock
+ * @param {Object} res - Objet de réponse Express
+ * @returns {Promise&lt;void>} Réponse JSON confirmant l'ajout
+ * @throws {Error} 400 - Si quantiteStock n'est pas un nombre
+ * @throws {Error} 404 - Si la pièce n'est pas trouvée
+ * @throws {Error} 500 - En cas d'erreur serveur
+ * @example
+ * PUT /api/stock/addstock/1
+ * {
+ *   "quantiteStock": 10
+ * }
+ * 
+ * Response:
+ * {
+ *   "message": "Stock ajouté avec succès"
+ * }
+ */
+const addStock = async (req, res) => {
+    const pk_piece = req.params.id;
+    const { quantiteStock } = req.body;
+
+    if (typeof quantiteStock !== 'number') {
+        return res.status(400).json({ error: 'quantiteStock doit être un nombre' });
+    }
+
+    try {
+        const updated = await stockServices.addStock(pk_piece, quantiteStock);
+        if (updated) {
+            res.status(200).json({ message: 'Stock ajouté avec succès' });
+        } else {
+            res.status(404).json({ error: 'Pièce non trouvée' });
+        }
+    } catch (error) {
+        res.status(400).json({ error: 'Bad Request' });
+    }
+};
+
+/**
+ * Met à jour la quantité de stock d'une pièce (remplace la valeur existante)
+ * @async
+ * @function updateStock
+ * @param {Object} req - Objet de requête Express
+ * @param {Object} req.params - Paramètres de la requête
+ * @param {string} req.params.id - ID de la pièce
+ * @param {Object} req.body - Corps de la requête
+ * @param {number} req.body.quantiteStock - Nouvelle quantité de stock
+ * @param {Object} res - Objet de réponse Express
+ * @returns {Promise&lt;void>} Réponse JSON confirmant la mise à jour
+ * @throws {Error} 400 - Si quantiteStock n'est pas un nombre
+ * @throws {Error} 404 - Si la pièce n'est pas trouvée
+ * @throws {Error} 500 - En cas d'erreur serveur
+ * @example
+ * PUT /api/stock/updatestock/1
+ * {
+ *   "quantiteStock": 25
+ * }
+ * 
+ * Response:
+ * {
+ *   "message": "Stock mis à jour avec succès"
+ * }
+ */
+const updateStock = async (req, res) => {
+    const pk_piece = req.params.id;
+    const { quantiteStock } = req.body;
+
+    if (typeof quantiteStock !== 'number') {
+        return res.status(400).json({ error: 'quantiteStock doit être un nombre' });
+    }
+
+    try {
+        const updated = await stockServices.updateStock(pk_piece, quantiteStock);
+        if (updated) {
+            res.status(200).json({ message: 'Stock mis à jour avec succès' });
+        } else {
+            res.status(404).json({ error: 'Pièce non trouvée' });
+        }
+    } catch (error) {
+        res.status(400).json({ error: 'Bad Request' });
+    }
+};
+
+module.exports = {
+    getAllStocks,
+    addStock,
+    updateStock,
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addMoto">addMoto</a></li><li><a href="global.html#addStock">addStock</a></li><li><a href="global.html#checkLogin">checkLogin</a></li><li><a href="global.html#connection">connection</a></li><li><a href="global.html#deleteMoto">deleteMoto</a></li><li><a href="global.html#getAllMotos">getAllMotos</a></li><li><a href="global.html#getAllStocks">getAllStocks</a></li><li><a href="global.html#getMoto">getMoto</a></li><li><a href="global.html#getMotoById">getMotoById</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#montePiece">montePiece</a></li><li><a href="global.html#options">options</a></li><li><a href="global.html#updateStock">updateStock</a></li><li><a href="global.html#validateAuthentification">validateAuthentification</a></li><li><a href="global.html#validateMoto">validateMoto</a></li><li><a href="global.html#validateStock">validateStock</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Jun 10 2025 23:44:15 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

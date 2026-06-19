@@ -1,0 +1,228 @@
+main {
+    padding-top: 100px; /* Par exemple */
+}
+
+.zones-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    width: 100vw;
+    height: calc(100vh - 120px); /* Prend presque tout l'écran, ajuste selon header/menu */
+    box-sizing: border-box;
+}
+
+.zone {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: white;
+    border: 2px solid black;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden; /* Pas de scroll */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Responsive : empile les zones en colonne et garde une hauteur visible */
+@media (max-width: 900px) {
+    .zones-container {
+        flex-direction: column;
+        gap: 16px;
+        padding: 8px;
+        height: 80vh;      /* Prend le plus de place possible */
+        min-height: 0;
+    }
+    .zone {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;      /* Prend toute la hauteur disponible */
+        min-height: 0;
+        flex: 1 1 0;       /* Permet de s'étirer également */
+        box-sizing: border-box;
+    }
+}
+
+/* tableau */
+
+/* Pour que la zone droite laisse la place à la scrollbar du tableau */
+#zone-droite {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+#zone-gauche {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#zone-gauche h2 {
+    flex: 0 0 auto;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: none; /* retire le trait noir en dessous */
+    border-top: none; /* retire le trait noir en haut */
+}
+
+#lise-moto {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch; /* Les cartes prennent toute la largeur */
+}
+
+/* Le wrapper prend toute la hauteur disponible dans la zone */
+#wrapper {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* La table peut défiler verticalement si besoin */
+.gridjs-wrapper {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow-y: scroll !important;   /* scroll vertical TOUJOURS visible */
+  overflow-x: hidden !important;   /* pas de scroll horizontal */
+  display: block;
+  box-sizing: border-box;
+}
+
+.gridjs-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed !important; /* fixed pour forcer l'adaptation des colonnes */
+  word-break: break-word;
+}
+
+.gridjs-table th,
+.gridjs-table td {
+  width: 50% !important;   /* Toujours 50% pour chaque colonne */
+  min-width: 0 !important;
+  max-width: 100% !important;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  padding: 8px 6px;
+}
+
+/* On masque la barre de recherche (au cas où) */
+.gridjs-search {
+  display: none !important;
+}
+
+/* Empêche le scroll horizontal global mais autorise le vertical */
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+
+/* CSS spécifique à la carte moto */
+.carte-moto {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 2px solid #222;
+    border-radius: 0;
+    padding: 12px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+.carte-moto-nom {
+    flex: 1 1 120px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #222;
+}
+
+.carte-moto-num {
+    width: 70px;
+    text-align: right;
+    font-family: monospace;
+    font-size: 1rem;
+    color: #555;
+}
+
+.carte-moto-barre {
+    flex: 2 1 160px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    height: 18px;
+    margin: 0 8px;
+    overflow: hidden;
+    min-width: 100px;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.carte-moto-progress {
+    background: #aaa;
+    height: 100%;
+    border-radius: 6px 0 0 6px;
+    transition: width 0.3s;
+}
+
+.carte-moto-btn {
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+
+.carte-moto-btn:hover {
+    background: #eee;
+}
+
+.carte-moto-img {
+    width: 48px;
+    height: 48px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
