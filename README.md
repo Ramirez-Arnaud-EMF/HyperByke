@@ -4,233 +4,232 @@
 
 ## Introduction
 
-HyperByke est une application de gestion destinée aux garages de motos, principalement utilisée par les garagistes et le personnel logistique. Elle a pour objectif d’optimiser la gestion de la fabrication des motos, des pièces détachées et des stocks. L’application permet de suivre en temps réel l’avancement des motos en cours de fabrication, avec une liste des pièces nécessaires et la possibilité de notifier leur assemblage. En ce qui concerne le stock, HyperByke se charge de la mise à jour automatique des inventaires à chaque consommation de pièces, garantissant ainsi une gestion simplifiée et fluide. De plus, elle permet de passer des commandes pour réapprovisionner les stocks lorsqu’un seuil critique est atteint.
+HyperByke is a management application intended for motorcycle garages, mainly used by mechanics and logistics personnel. Its goal is to optimize the management of motorcycle manufacturing, spare parts, and inventory. The application allows for real-time tracking of the progress of motorcycles currently being built, with a list of necessary parts and the ability to notify their assembly. Regarding the inventory, HyperByke handles the automatic updating of stock each time a part is consumed, ensuring a simplified and smooth management. Moreover, it allows placing orders to restock when a critical threshold is reached.
 
 ---
 
+## Usage
 
-## Utilisation
+Here is the link to the website: https://arnaudramirez.emf-informatique.ch/index.html
 
-Voici le lien vers le site : https://arnaudramirez.emf-informatique.ch/index.html
+A Mechanic account / username: jdupont    password: pass1234
 
-Un compte Garagiste / username : jdupont    password : pass1234
+A Logistics account / username: mleblanc    password: securepass
 
+### Run with Docker Compose (3 containers)
 
-Un compte Logistique / username : mleblanc    password : securepass
+The project can be launched with 3 containers:
+- client: Nginx serving the frontend
+- server: Node.js/Express for the API
+- mysql: MySQL database
 
-### Lancer avec Docker Compose (3 conteneurs)
+Prerequisites:
+- Docker Desktop installed and running
 
-Le projet peut etre lance avec 3 conteneurs:
-- client: Nginx qui sert le frontend
-- server: Node.js/Express pour l'API
-- mysql: base de donnees MySQL
-
-Prerequis:
-- Docker Desktop installe et demarre
-
-Commande de demarrage:
+Start command:
 
 ```bash
 docker compose up --build -d
 ```
 
-Acces:
+Access:
 - Frontend: http://localhost:8080
-- API directe: http://localhost:3000/api
+- Direct API: http://localhost:3000/api
 - Swagger: http://localhost:8080/api-docs
 - MySQL: localhost:3306
 
-Arret:
+Stop:
 
 ```bash
 docker compose down
 ```
 
-Configuration DB optionnelle:
-- Les variables peuvent etre surchargees via un fichier .env a la racine (meme niveau que docker-compose.yml)
-- Variables supportees: DB_USER, DB_PASSWORD, DB_NAME, JWT_SECRET, JWT_EXPIRATION
-- DB_HOST est configure automatiquement sur le service mysql dans Docker Compose
+Optional DB Configuration:
+- Variables can be overridden via a .env file at the root (same level as docker-compose.yml)
+- Supported variables: DB_USER, DB_PASSWORD, DB_NAME, JWT_SECRET, JWT_EXPIRATION
+- DB_HOST is automatically configured on the mysql service in Docker Compose
 
-## Analyse
+## Analysis
 
-### Diagramme de cas d'utilisation
+### Use Case Diagram
 
-#### Acteurs
+#### Actors
 
-- **Utilisateur** : représente toute personne utilisant l’application, avant d’être connectée à un compte.
-- **Personnel Logistique** : responsable de la gestion des stocks et du suivi des pièces détachées.
-- **Garagiste** : chargé de la production et de l’assemblage des motos.
+- **User**: represents any person using the application before logging into an account.
+- **Logistics Personnel**: responsible for inventory management and tracking spare parts.
+- **Mechanic**: in charge of motorcycle production and assembly.
 
-#### Cas d’utilisation
+#### Use Cases
 
-- **Créer un compte** et **Se connecter**  
-  Accessibles à tous les utilisateurs pour accéder à l’application.
-- **Consulter la page d’accueil**  
-  Point d’entrée commun à tous les utilisateurs.
-- **Consulter la liste des pièces restantes à assembler**  
-  Permet de suivre l’avancement de la production.
-- **Consulter la liste des motos en production**  
-  Permet de suivre l’avancement de la production.
-- **Ajouter une moto à la production**  
-  Fonctionnalité réservée au personnel logistique et aux garagistes pour gérer la fabrication.
-- **Consulter une des motos de la liste de production**  
-  Fonctionnalité réservée au personnel logistique et aux garagistes pour gérer la fabrication.
-- **Marquer une pièce comme assemblée**  
-  Permet de notifier l’avancement de l’assemblage.
-- **Consulter le stock**  
-  Action spécifique au personnel logistique pour assurer la disponibilité des pièces.
-- **Modifier la quantité du stock**  
-  Action spécifique au personnel logistique.
-- **Faire une commande de stock**  
-  Action spécifique au personnel logistique.
+- **Create an account** and **Log in**  
+  Accessible to all users to access the application.
+- **Consult the home page**  
+  Common entry point for all users.
+- **Consult the list of parts remaining to be assembled**  
+  Allows tracking the progress of production.
+- **Consult the list of motorcycles in production**  
+  Allows tracking the progress of production.
+- **Add a motorcycle to production**  
+  Feature reserved for logistics personnel and mechanics to manage manufacturing.
+- **Consult one of the motorcycles in the production list**  
+  Feature reserved for logistics personnel and mechanics to manage manufacturing.
+- **Mark a part as assembled**  
+  Allows notifying the progress of assembly.
+- **Consult inventory**  
+  Specific action for logistics personnel to ensure parts availability.
+- **Modify inventory quantity**  
+  Specific action for logistics personnel.
+- **Place an inventory order**  
+  Specific action for logistics personnel.
 
-Cette structuration permet de mieux visualiser les responsabilités et les droits de chaque acteur dans l’application HyperByke.
-
----
-
-### Maquettes
-
-Chaque maquette correspond à une fonctionnalité clé :
-
-- **Page d’accueil** : Vue générale accessible à tous les utilisateurs après connexion.
-- **Liste des motos en production** : Permet de suivre l’avancement des fabrications en cours.
-- **Détail d’une moto** : Affiche les pièces nécessaires à assembler et leur état d’avancement.
-- **Gestion du stock** : Réservée au personnel logistique pour consulter, modifier et commander des pièces.
-- **Ajout d’une moto à la production** : Formulaire pour lancer la fabrication d’une nouvelle moto.
-- **Connexion** : Accès sécurisé à l’application.
-
-Les captures suivantes présentent ces différents écrans :
-
-![Page d’accueil](documentation/image-1.png)
-
-![Liste des motos en production](documentation/image-2.png)
-
-![Détail d’une moto](documentation/image-3.png)
-
-![Gestion du stock](documentation/image-4.png)
-
-![Ajout d’une moto à la production](documentation/image.png)
-
-![Connexion](documentation/image-6.png)
-
-![Création de compte](documentation/image-7.png)
+This structuring helps better visualize the responsibilities and rights of each actor in the HyperByke application.
 
 ---
 
-### Diagramme d'activité
+### Mockups
 
-Voici le Diagramme d'activité. Il montre la connexion avec la partie client, serveur et la base de données :
+Each mockup corresponds to a key feature:
 
-![Diagramme d'activité](documentation/image-8.png)
+- **Home page**: General view accessible to all users after login.
+- **List of motorcycles in production**: Allows tracking the progress of ongoing manufacturing.
+- **Motorcycle details**: Displays the necessary parts to assemble and their progress state.
+- **Inventory management**: Reserved for logistics personnel to consult, modify, and order parts.
+- **Adding a motorcycle to production**: Form to launch the manufacturing of a new motorcycle.
+- **Login**: Secure access to the application.
+- **Account creation**: Create a new account.
+
+The following screenshots present these different screens:
+
+![Home page](documentation/image-1.png)
+
+![List of motorcycles in production](documentation/image-2.png)
+
+![Motorcycle details](documentation/image-3.png)
+
+![Inventory management](documentation/image-4.png)
+
+![Adding a motorcycle to production](documentation/image.png)
+
+![Login](documentation/image-6.png)
+
+![Account creation](documentation/image-7.png)
 
 ---
 
-### Diagramme ER
+### Activity Diagram
 
-Voici le Diagramme Entité-Relation de la base de données de HyperByke :
+Here is the Activity Diagram. It shows the connection with the client part, server, and the database:
 
-![Diagramme ER](documentation/image-5.png)
+![Activity Diagram](documentation/image-8.png)
 
-**Explication des tables**
+---
 
-- **ConfigurationMoto** : définit les pièces nécessaires par type de moto (modèle).
-- **ConstructionMotoPiece** : enregistre les pièces réellement utilisées pour une moto donnée.
-- **Moto** : moto réelle en construction ou terminée.
-- **Pièce** : stock des pièces.
-- **Employé** : avec rôle (logisticien ou garagiste).
+### ER Diagram
 
-**Relations entre les entités**
+Here is the Entity-Relationship Diagram of the HyperByke database:
+
+![ER Diagram](documentation/image-5.png)
+
+**Table Explanation**
+
+- **ConfigurationMoto**: defines the necessary parts per type of motorcycle (model).
+- **ConstructionMotoPiece**: records the parts actually used for a given motorcycle.
+- **Moto**: actual motorcycle under construction or finished.
+- **Piece**: parts inventory.
+- **Employe**: with role (logistics or mechanic).
+
+**Relations between entities**
 
 - **Moto – ConstructionMotoPiece**
-  - Une moto utilise plusieurs pièces pour sa construction.
-  - Chaque enregistrement de pièce utilisée appartient à une seule moto.
-- **Pièce – ConstructionMotoPiece**
-  - Une pièce peut être utilisée dans la construction de plusieurs motos.
-  - Chaque ligne de ConstructionMotoPiece fait référence à une seule pièce.
-- **ConfigurationMoto – Pièce**
-  - Une configuration de moto référence une pièce nécessaire à un modèle.
-  - Une pièce peut être présente dans plusieurs configurations de motos.
+  - A motorcycle uses several parts for its construction.
+  - Each record of a part used belongs to a single motorcycle.
+- **Piece – ConstructionMotoPiece**
+  - A part can be used in the construction of several motorcycles.
+  - Each line of ConstructionMotoPiece refers to a single part.
+- **ConfigurationMoto – Piece**
+  - A motorcycle configuration references a necessary part for a model.
+  - A part can be present in several motorcycle configurations.
 - **ConfigurationMoto – Moto**
-  - Une configuration est liée à un type de moto générique (modèle).
-  - Un type de moto peut avoir plusieurs lignes de configuration (une par pièce nécessaire).
+  - A configuration is linked to a generic motorcycle type (model).
+  - A motorcycle type can have several configuration lines (one per necessary part).
 
 ---
 
-## Conception
+## Design
 
-### Diagramme de classes client
+### Client Class Diagram
 
-Voici le Diagramme de classes client, on peut retrouver tous les fichiers HTML, les controllers et les services :
+Here is the Client Class Diagram, where all HTML files, controllers, and services can be found:
 
-![Diagramme de classes client](documentation/image-9.png)
+![Client Class Diagram](documentation/image-9.png)
 
-### Diagramme de classes serveur
+### Server Class Diagram
 
-Voici le Diagramme de classes serveur qui permet de voir la structure générale du projet avec les différentes routes, services et controllers.
+Here is the Server Class Diagram showing the general structure of the project with the different routes, services, and controllers.
 
-![Diagramme de classes serveur](documentation/image-10.png)
+![Server Class Diagram](documentation/image-10.png)
 
-### Diagramme d'interaction
+### Interaction Diagram
 
-Voici le Diagramme d'interaction. Il montre un garagiste qui veut afficher la liste des motos en production :
+Here is the Interaction Diagram. It shows a mechanic who wants to display the list of motorcycles in production:
 
-![Diagramme d'interaction](documentation/image-11.png)
+![Interaction Diagram](documentation/image-11.png)
 
-### Schéma relationnel
+### Relational Schema
 
-Voici le Schéma relationnel réalisé avec MySQL. Il permet de voir les différentes tables.
+Here is the Relational Schema realized with MySQL. It shows the different tables.
 
-![Schéma relationnel](documentation/image-12.png)
+![Relational Schema](documentation/image-12.png)
 
 ---
 
-### Conception des tests
+### Test Design
 
-Voici la liste des tests que je vais effectuer :
+Here is the list of tests I will perform:
 
-| N°  | Date      | Objectif / Fonctionnalité testée                                 | Méthode / Étapes principales                                                                 | Résultat attendu                                      |
+| No. | Date      | Objective / Tested Feature                                 | Main Steps / Method                                                                 | Expected Result                                      |
 |-----|-----------|-------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| 1   | 11.06.25  | Se connecter en tant que garagiste                               | Saisir identifiants garagiste, valider                                                      | Accès à l’interface garagiste, message de bienvenue   |
-| 2   | 11.06.25  | Se connecter en tant que logisticien                             | Saisir identifiants logisticien, valider                                                    | Accès à l’interface logisticien, message de bienvenue |
-| 3   | 11.06.25  | Ajouter du stock (logisticien)                                  | Aller sur la page stock, cliquer « Ajouter », remplir formulaire, valider                   | Nouvelle pièce ajoutée au stock, confirmation         |
-| 4   | 11.06.25  | Modifier la quantité de stock (logisticien)                     | Aller sur la page stock, sélectionner une pièce, modifier quantité, valider                 | Quantité mise à jour, confirmation affichée           |
-| 5   | 11.06.25  | Voir la sous-page des motos (garagiste)                         | Aller sur la liste des motos, cliquer sur une moto                                          | Affichage du détail de la moto sélectionnée           |
-| 6   | 11.06.25  | Notifier le montage d’une pièce sur une moto (garagiste)        | Sur le détail d’une moto, cliquer « Marquer comme assemblée » sur une pièce                 | Pièce marquée comme assemblée, état mis à jour        |
-| 7   | 11.06.25  | Ajouter une moto à la liste des motos (garagiste)               | Aller sur la page d’ajout, remplir le formulaire, valider                                   | Nouvelle moto ajoutée à la liste, confirmation        |
-| 8   | 11.06.25  | Afficher le stock (garagiste et logisticien)                    | Aller sur la page stock                                                                     | Liste des pièces et quantités affichée correctement    |
+| 1   | 11.06.25  | Log in as a mechanic                               | Enter mechanic credentials, submit                                                      | Access to the mechanic interface, welcome message   |
+| 2   | 11.06.25  | Log in as a logistics worker                             | Enter logistics credentials, submit                                                    | Access to the logistics interface, welcome message |
+| 3   | 11.06.25  | Add to inventory (logistics)                                  | Go to the inventory page, click "Add", fill out the form, submit                   | New part added to inventory, confirmation         |
+| 4   | 11.06.25  | Modify inventory quantity (logistics)                     | Go to the inventory page, select a part, modify quantity, submit                 | Quantity updated, confirmation displayed           |
+| 5   | 11.06.25  | View motorcycle sub-page (mechanic)                         | Go to the motorcycle list, click on a motorcycle                                          | Details of selected motorcycle displayed           |
+| 6   | 11.06.25  | Notify assembly of a part on a motorcycle (mechanic)        | On a motorcycle's details, click "Mark as assembled" on a part                 | Part marked as assembled, status updated        |
+| 7   | 11.06.25  | Add a motorcycle to the motorcycle list (mechanic)               | Go to the add page, fill out the form, submit                                   | New motorcycle added to the list, confirmation        |
+| 8   | 11.06.25  | Display the inventory (mechanic and logistics)                    | Go to the inventory page                                                                     | List of parts and quantities displayed correctly    |
 
 ---
 
-## Réalisation
+## Implementation
 
-### Descente de code
+### Code Walkthrough
 
-_Vous décrivez et expliquez une action réalisable dans votre application. Vous pouvez notamment prendre un des cas de votre diagramme des cas d'utilisation. Vous expliquez toutes les étapes du client jusqu'au serveur et la base de données ainsi que le retour vers le client. Vos explications contiennent des extraits de codes pertinents – il ne sert surtout à rien de mettre tout le code dans votre rapport ! Utilisez la Markdown pour vos extraits de code. Côté client, la descente de code illustre les différents éléments de la structure MVC de votre application, les éléments de l'interface, les différents événements, la validation des données et leurs transmissions à la partie serveur. Pour le serveur, la descente de code doit illustrer : les routes, la méthode http utilisée, les codes de retours, la vérification du token JWT, l'accès à la base de données, la validation des données côté serveur._
+_You describe and explain an actionable process in your application. You can in particular take one of the cases from your use case diagram. You explain all the steps from the client straight to the server and the database as well as the return to the client. Your explanations contain relevant code snippets – there is absolutely no point setting up all the code in your report! Use Markdown for your code extracts. On the client side, the code walkthrough illustrates the different elements of the MVC structure of your application, the interface elements, the various events, data validation, and their transmission to the server side. For the server, the code walkthrough must illustrate: routes, HTTP method used, return codes, JWT token verification, database access, server-side data validation._
 
-### Descente de code : Suppression d'une moto
+### Code Walkthrough: Deleting a motorcycle
 
-Prenons l’exemple du cas d’utilisation « Supprimer une moto » pour le garagiste. Voici le cheminement complet de la requête, du client jusqu’à la base de données, en passant par le serveur, avec des extraits de code illustratifs.
+Let's take the example of the "Delete a motorcycle" use case for the mechanic. Here is the complete path of the request, from the client to the database, going through the server, with illustrative code snippets.
 
-#### 1. Côté client (garagiste)
+#### 1. Client side (mechanic)
 
-Dans l’interface, chaque moto de la liste possède un bouton « Supprimer » :
+In the interface, each motorcycle in the list has a "Delete" button:
 
 ```html
-<!-- Extrait HTML pour chaque moto -->
+<!-- HTML excerpt for each motorcycle -->
 <li>
-  <span>Nom de la moto</span>
-  <button class="btn-supprimer" data-id="1">Supprimer</button>
+  <span>Motorcycle name</span>
+  <button class="btn-supprimer" data-id="1">Delete</button>
 </li>
 ```
 
-Le contrôleur JS gère l’événement de clic sur le bouton :
+The JS controller handles the click event on the button:
 
 ```js
-// Contrôleur côté client (exemple : client/controllers/motoController.js)
+// Client side controller (example: client/controllers/motoController.js)
 document.querySelectorAll('.btn-supprimer').forEach(btn => {
   btn.addEventListener('click', function() {
     const id = this.getAttribute('data-id');
-    if (confirm('Voulez-vous vraiment supprimer cette moto ?')) {
+    if (confirm('Do you really want to delete this motorcycle?')) {
       fetch(`/api/moto/${id}`, {
         method: 'DELETE',
         headers: {
@@ -238,11 +237,11 @@ document.querySelectorAll('.btn-supprimer').forEach(btn => {
         }
       })
       .then(res => {
-        if (!res.ok) throw new Error('Erreur lors de la suppression');
+        if (!res.ok) throw new Error('Deletion error');
         return res.json();
       })
       .then(() => {
-        // Rafraîchir la liste des motos après suppression
+        // Refresh the motorcycle list after deletion
         getAllMotos();
       })
       .catch(err => alert(err.message));
@@ -259,50 +258,50 @@ function getAllMotos() {
 }
 
 function afficherMotos(motos) {
-  // Met à jour dynamiquement la liste des motos dans l’interface
+  // Dynamically updates the list of motorcycles in the interface
 }
 ```
 
-#### 2. Route Express côté serveur
+#### 2. Express Route on the server side
 
-Dans `server/app/routes/motoRoutes.js` :
+In `server/app/routes/motoRoutes.js`:
 
 ```js
 router.delete("/:id", validateAuthentification(['garagiste']), motoController.deleteMoto);
 ```
 
-- La route `/api/moto/:id` est protégée par le middleware d’authentification et de rôle.
+- The route `/api/moto/:id` is protected by the authentication and role middleware.
 
-#### 3. Middleware d’authentification
+#### 3. Authentication Middleware
 
-Dans `server/app/middlewares/validateAuthentification.js` :
+In `server/app/middlewares/validateAuthentification.js`:
 
 ```js
 // ...existing code...
 if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
-    return res.status(403).json({ error: 'Accès refusé : rôle insuffisant' });
+    return res.status(403).json({ error: 'Access denied: insufficient role' });
 }
 // ...existing code...
 ```
 
-#### 4. Contrôleur moto
+#### 4. Motorcycle Controller
 
-Dans `server/app/controllers/motoController.js` :
+In `server/app/controllers/motoController.js`:
 
 ```js
 const deleteMoto = async (req, res) => {
   try {
     await motoService.deleteMoto(req.params.id);
-    res.status(200).json({ message: 'Moto supprimée' });
+    res.status(200).json({ message: 'Motorcycle deleted' });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur serveur lors de la suppression' });
+    res.status(500).json({ error: 'Server error during deletion' });
   }
 };
 ```
 
-#### 5. Service moto
+#### 5. Motorcycle Service
 
-Dans `server/app/services/motoService.js` :
+In `server/app/services/motoService.js`:
 
 ```js
 const deleteMoto = async (id) => {
@@ -315,43 +314,43 @@ const deleteMoto = async (id) => {
 };
 ```
 
-#### 6. Retour au client
+#### 6. Return to client
 
-Après la suppression, le client relance la fonction `getAllMotos()` pour rafraîchir la liste. La moto supprimée n’apparaît plus dans l’interface.
-
----
-
-### Différence entre la conception et l’implémentation
-
-Je trouve le projet plus proche des concepteurs pensés mais il y a quelques différences comme dans le client la barre de progression des motos n'a pas eu le temps d'être finalisée et je n'ai pas eu le temps d'ajouter des couleurs dans tous les tableaux pour alerter quand les valeurs sont basses.
-
-Dans mon client j'ai des contrôleurs en plus que je n'avais pas prévus.
-Le serveur est très proche de la conception, il y a juste un ou deux GET ou POST que j'ai dû ajouter.
-
-### Problèmes rencontrés
-
-J'ai eu un problème pour la suppression des pièces dans le client : dans le GET d'une moto dans la liste des pièces, je n'envoyais pas le PK donc je ne pouvais pas savoir le PK de la pièce pour l'utiliser dans la requête pour monter la pièce. J'ai dû ajouter dans le serveur cette partie.
-
-J'ai eu un problème lors de l'hébergement du serveur : j'avais bcrypt d'installé et pas bcryptjs, ce qui a donc posé une erreur.
-
-Sinon je n'ai pas eu d'autre problème majeur.
+After deletion, the client restarts the `getAllMotos()` function to refresh the list. The deleted motorcycle no longer appears in the interface.
 
 ---
 
-## Réalisation des tests
+### Difference between design and implementation
 
-Voici les tests réalisés :
+I find the project closer to the designed concepts, but there are some differences. On the client side, the motorcycle progress bar was not finalized in time, and I didn't have time to add colors in all tables to alert when values are low.
 
-| N°  | Date      | Objectif / Fonctionnalité testée                                 | Méthode / Étapes principales                                                                 | Résultat attendu                                      | État  | Commentaires / Conclusion                                                                                 | Visa              |
+In my client, I have extra controllers that I had not planned for.
+The server is very close to the design, I just had to add one or two GETs or POSTs.
+
+### Encountered problems
+
+I had a problem concerning the deletion of parts in the client: in the GET of a motorcycle in the parts list, I wasn't sending the PK, so I couldn't know the parts PK in order to use it in the request to assemble the part. I had to add this portion to the server.
+
+I had a problem during the server hosting: I had bcrypt installed instead of bcryptjs, which caused an error.
+
+Otherwise, I had no other major issues.
+
+---
+
+## Test Execution
+
+Here are the tests performed:
+
+| No. | Date      | Objective / Tested Feature                                 | Main Steps / Method                                                                 | Expected Result                                      | Status  | Comments / Conclusion                                                                                 | Visa              |
 |-----|-----------|-------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------|-------|----------------------------------------------------------------------------------------------------------|-------------------|
-| 1   | 11.06.25  | Se connecter en tant que garagiste                               | Saisir identifiants garagiste, valider                                                      | Accès à l’interface garagiste, message de bienvenue   | ✅    | Connexion réussie, interface adaptée au rôle garagiste.                                                  | Arnaud Ramirez    |
-| 2   | 11.06.25  | Se connecter en tant que logisticien                             | Saisir identifiants logisticien, valider                                                    | Accès à l’interface logisticien, message de bienvenue | ✅    | Connexion réussie, interface adaptée au rôle logisticien.                                                | Arnaud Ramirez    |
-| 3   | 11.06.25  | Ajouter du stock (logisticien)                                  | Aller sur la page stock, cliquer « Ajouter », remplir formulaire, valider                   | Nouvelle pièce ajoutée au stock, confirmation         | ✅    | Ajout de stock fonctionnel, pièce visible dans la liste.                                                  | Arnaud Ramirez    |
-| 4   | 11.06.25  | Modifier la quantité de stock (logisticien)                     | Aller sur la page stock, sélectionner une pièce, modifier quantité, valider                 | Quantité mise à jour, confirmation affichée           | ✅    | Modification prise en compte, quantité correcte affichée.                                                 | Arnaud Ramirez    |
-| 5   | 11.06.25  | Voir la sous-page des motos (garagiste)                         | Aller sur la liste des motos, cliquer sur une moto                                          | Affichage du détail de la moto sélectionnée           | ✅    | Navigation et affichage des détails de la moto OK.                                                        | Arnaud Ramirez    |
-| 6   | 11.06.25  | Notifier le montage d’une pièce sur une moto (garagiste)        | Sur le détail d’une moto, cliquer « Marquer comme assemblée » sur une pièce                 | Pièce marquée comme assemblée, état mis à jour        | ✅    | L’état de la pièce est bien mis à jour dans l’interface.                                                  | Arnaud Ramirez    |
-| 7   | 11.06.25  | Ajouter une moto à la liste des motos (garagiste)               | Aller sur la page d’ajout, remplir le formulaire, valider                                   | Nouvelle moto ajoutée à la liste, confirmation        | ✅    | Moto ajoutée, visible dans la liste des motos en production.                                              | Arnaud Ramirez    |
-| 8   | 11.06.25  | Afficher le stock (garagiste et logisticien)                    | Aller sur la page stock                                                                     | Liste des pièces et quantités affichée correctement    | ✅    | Affichage correct pour les deux rôles, informations cohérentes.                                            | Arnaud Ramirez    |
+| 1   | 11.06.25  | Log in as a mechanic                               | Enter mechanic credentials, submit                                                      | Access to the mechanic interface, welcome message   | ✅    | Successful login, interface fits the mechanic role.                                                  | Arnaud Ramirez    |
+| 2   | 11.06.25  | Log in as a logistics worker                             | Enter logistics credentials, submit                                                    | Access to the logistics interface, welcome message | ✅    | Successful login, interface fits the logistics role.                                                | Arnaud Ramirez    |
+| 3   | 11.06.25  | Add to inventory (logistics)                                  | Go to the inventory page, click "Add", fill out the form, submit                   | New part added to inventory, confirmation         | ✅    | Inventory addition successful, part visible in the list.                                                  | Arnaud Ramirez    |
+| 4   | 11.06.25  | Modify inventory quantity (logistics)                     | Go to the inventory page, select a part, modify quantity, submit                 | Quantity updated, confirmation displayed           | ✅    | Modification accounted for, correct quantity displayed.                                                 | Arnaud Ramirez    |
+| 5   | 11.06.25  | View motorcycle sub-page (mechanic)                         | Go to the motorcycle list, click on a motorcycle                                          | Details of selected motorcycle displayed           | ✅    | Navigation and display of motorcycle details OK.                                                        | Arnaud Ramirez    |
+| 6   | 11.06.25  | Notify assembly of a part on a motorcycle (mechanic)        | On a motorcycle's details, click "Mark as assembled" on a part                 | Part marked as assembled, status updated        | ✅    | The part's status is properly updated in the interface.                                                  | Arnaud Ramirez    |
+| 7   | 11.06.25  | Add a motorcycle to the motorcycle list (mechanic)               | Go to the add page, fill out the form, submit                                   | New motorcycle added to the list, confirmation        | ✅    | Motorcycle added, visible in the list of motorcycles in production.                                              | Arnaud Ramirez    |
+| 8   | 11.06.25  | Display the inventory (mechanic and logistics)                    | Go to the inventory page                                                                     | List of parts and quantities displayed correctly    | ✅    | Correct display for both roles, consistent information.                                            | Arnaud Ramirez    |
 
 ---
 
@@ -395,46 +394,46 @@ Screen test 8
 
 ## Conclusion
 
-Dans ce projet j'ai créé un site avec le backend et le frontend pour la gestion d'un garage de motos avec la gestion du stock et la gestion des motos en production. Tout fonctionne sauf certaines couleurs dans les tableaux et les barres de progression sur l'assemblage des motos, je n'ai pas eu le temps de finaliser. Je pense que mon projet n'est pas mauvais mais je me suis mal organisé et j'ai pris pas mal de temps à faire les schémas, ce qui a fait que j'ai dû faire beaucoup de choses en peu de temps. Je trouve que j'ai trop utilisé de l'IA pour ce projet en ayant conscience de ce que l'IA a fait et que je suis capable de le faire moi aussi. Pour améliorer cela, j'aurais dû me faire un planning et travailler à la maison, ce qui m'aurait permis d'avoir plus de temps et d'être tranquille pour réaliser le projet. Ce projet était très intéressant et m'a permis de comprendre beaucoup de choses entre les API, les serveurs, la création de client et même sur l'hébergement.
+In this project, I created a website with backend and frontend aimed at managing a motorcycle garage with inventory management and motorcycles in production management. Everything works except for certain colors in the tables and the progress bars for motorcycle assembly, which I did not have time to finalize. I think my project is not bad, but I organized myself poorly and took quite a bit of time to design the schemas, resulting in having to do many things in a short span. I feel I relied too much on AI for this project, being aware of what AI accomplished and knowing I am capable of doing it myself as well. To improve on this, I should have devised a schedule and worked from home, which would have allowed me more time and peace to realize the project. This project was very interesting and enabled me to understand a lot of things regarding APIs, servers, client creation, and even hosting.
 
 ---
 
-## Conclusions du module 295 – Tests et qualité logicielle
+## Module 295 Conclusions – Testing and Software Quality
 
-### Ce que j'ai aimé
+### What I liked
 
-J'ai vraiment apprécié **Cypress** pour les tests fonctionnels. Le fait de voir le navigateur s'ouvrir, de pouvoir observer chaque action comme si c'était un vrai utilisateur, et de voir les tests passer en temps réel, c'est très satisfaisant. On comprend immédiatement ce qui se passe et pourquoi un test échoue.
+I really appreciated **Cypress** for functional testing. Seeing the browser open, being able to observe each action as if it were a real user, and watching tests pass in real-time is highly satisfying. You instantly understand what is happening and why a test fails.
 
-J'ai aussi beaucoup aimé le concept de la **séparation des environnements** avec deux bases de données distinctes (production et test). C'est une approche que je retrouverai forcément dans le monde professionnel et qui évite de nombreux problèmes.
+I also very much liked the concept of **separating environments** with two distinct databases (production and testing). This is an approach I will inevitably encounter in the professional world as it avoids numerous issues.
 
-Enfin, les **tests d'intégration avec Vitest** m'ont plu parce qu'ils testent vraiment l'application réelle : un vrai appel HTTP vers un vrai serveur avec une vraie base de données. On est sûr que l'application fonctionne, pas seulement que le code compilerait.
+Finally, **integration testing with Vitest** appealed to me because they actually test the real application: a true HTTP call to a real server with an actual database. We are sure the application works, not just that the code compiles.
 
-### Ce que j'ai moins aimé
+### What I liked less
 
-La partie la plus difficile a été la **configuration de l'environnement Docker pour les tests**. Quand il y a une erreur (comme le mauvais port ou le mauvais fichier SQL), les messages d'erreur ne sont pas toujours clairs et il faut investiguer longtemps pour trouver la source du problème. Par exemple, l'erreur ECONNRESET était causée par un simple `PORT: 3001` alors qu'il fallait `PORT: 3000` – ce genre de bug de configuration est très frustrant.
+The hardest part was **configuring the Docker environment for testing**. When there is an error (like the wrong port or wrong SQL file), the error messages are not always clear, requiring lengthy investigation to locate the problem's source. For instance, the ECONNRESET error was caused by a simple `PORT: 3001` when it should have been `PORT: 3000` – this kind of configuration bug is very frustrating.
 
-J'ai aussi trouvé que la documentation des tests (concept de test HERMES, protocole) demande beaucoup de rigueur et de temps. Écrire des tableaux de cas de test détaillés avec préconditions et résultats attendus est nécessaire mais fastidieux.
+I also felt that testing documentation (HERMES testing concept, protocol) requires much rigor and time. Writing detailed test case tables with preconditions and expected results is necessary but tedious.
 
-### Ce que j'ai appris
+### What I learned
 
-- La **pyramide des tests** et pourquoi on a beaucoup de tests unitaires, moins d'intégration, et peu de tests E2E : c'est une question de vitesse, de coût et de fiabilité.
-- La différence concrète entre **Jest** (tests unitaires, fonctions pures) et **Vitest** (tests d'intégration avec HTTP) et **Cypress** (tests E2E dans un navigateur réel).
-- Comment isoler un environnement de test avec **Docker** : une deuxième base de données, un deuxième serveur sur un port différent, initialisé avec des données de test contrôlées.
-- L'importance de l'**analyse statique** (ESLint) : les règles `no-var` et `eqeqeq` semblent simples, mais elles évitent des catégories entières de bugs causés par le comportement particulier de JavaScript avec les types et la portée.
-- Comment structurer une documentation de test professionnelle selon le modèle **HERMES** avec un concept de test (stratégie, cas de test) et un protocole (résultats datés, interprétation, conclusions).
+- **The testing pyramid** and why we have many unit tests, fewer integration tests, and very few E2E tests: it's a matter of speed, cost, and reliability.
+- **The concrete difference** between **Jest** (unit tests, pure functions), **Vitest** (integration tests with HTTP), and **Cypress** (E2E tests in a real browser).
+- **How to isolate a test environment with Docker**: a second database, a second server on a different port, initialized with controlled test data.
+- **The importance of static analysis (ESLint)**: `no-var` and `eqeqeq` rules seem simple, but they avoid whole categories of bugs caused by JavaScript's peculiar behavior with types and scoping.
+- **How to structure professional testing documentation** following the **HERMES** model, featuring a test concept (strategy, test case) and a protocol (dated results, interpretation, conclusions).
 
-### Estimation de mon propre travail
+### Estimation of my own work
 
-Je pense que mon travail sur ce module est **correct**. Les 65 tests passent tous (36 unitaires, 14 intégration, 15 fonctionnels, 0 violation de conformité) et la documentation est complète et structurée.
+I consider my work on this module **adequate**. The 65 tests all pass (36 unit, 14 integration, 15 functional, 0 compliance violations) and the documentation is complete and structured.
 
-Les points positifs :
-- Tous les tests fonctionnent et couvrent les deux cas d'utilisation principaux.
-- La séparation des environnements est bien faite avec une base de données de test dédiée.
-- La documentation suit le modèle HERMES demandé en cours.
+Positive points:
+- All tests run and cover the two main use cases.
+- Environment separation is properly handled with a dedicated test database.
+- Documentation follows the HERMES model requested in class.
 
-Les points à améliorer :
-- La couverture des tests pourrait être plus étendue : je n'ai testé que 2 endpoints sur les routes disponibles (login et stock), et pas les routes moto.
-- J'aurais pu écrire plus de tests d'intégration couvrant des cas d'erreur plus variés (ex : token expiré, erreur base de données).
-- Avec plus de temps, j'aurais ajouté une pipeline CI/CD pour automatiser l'exécution des tests à chaque push.
+Areas for improvement:
+- Test coverage could be more extensive: I only tested 2 endpoints of the available routes (login and stock), omitting motorcycle routes.
+- I could have written more integration tests covering a wider variety of edge cases (e.g., token expired, database error).
+- With more time, I would have set up a CI/CD pipeline to automate test execution on each push.
 
-Dans l'ensemble, je me donne une note de **4/6** : le travail demandé est réalisé et fonctionnel, mais la couverture de tests pourrait être plus ambitieuse.
+Overall, I'd give myself a grade of **4/6**: the requested work is implemented and functional, but test coverage could have been more ambitious.
