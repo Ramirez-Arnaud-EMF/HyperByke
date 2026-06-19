@@ -394,7 +394,8 @@ Screen test 8
 
 ## Conclusion
 
-In this project, I created a website with backend and frontend aimed at managing a motorcycle garage with inventory management and motorcycles in production management. Everything works except for certain colors in the tables and the progress bars for motorcycle assembly, which I did not have time to finalize. I think my project is not bad, but I organized myself poorly and took quite a bit of time to design the schemas, resulting in having to do many things in a short span. I feel I relied too much on AI for this project, being aware of what AI accomplished and knowing I am capable of doing it myself as well. To improve on this, I should have devised a schedule and worked from home, which would have allowed me more time and peace to realize the project. This project was very interesting and enabled me to understand a lot of things regarding APIs, servers, client creation, and even hosting.
+In this project, I created a website with both a backend and frontend designed to manage a motorcycle garage, including inventory management and motorcycle production tracking. Everything works except for certain table colors and the progress bars for motorcycle assembly, which I did not have enough time to finalize. I believe the project is solid overall, but I could have organized my work better. I spent a significant amount of time creating the diagrams and documentation, which left me with less time to complete some implementation details. To improve my workflow, I should have planned my tasks more carefully and worked on the project outside of class hours, giving myself more time to develop and refine the application. This project was very interesting and helped me gain a deeper understanding of APIs, servers, frontend and backend development, as well as application deployment and hosting.
+
 
 ---
 
